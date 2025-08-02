@@ -1,0 +1,161 @@
+.container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 2rem auto;
+}
+
+.profileBox {
+  background-color: var(--surface-color);
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.title {
+  margin-top: 0;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+.field {
+  margin-bottom: 1.5rem;
+}
+
+.field label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-color);
+  opacity: 0.7;
+  margin-bottom: 0.5rem;
+}
+
+.field p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.readOnly {
+  color: var(--text-color);
+  opacity: 0.6;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.editButton, .saveButton, .cancelButton {
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s;
+}
+
+.editButton, .saveButton {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.editButton:hover, .saveButton:hover {
+  background-color: var(--primary-hover-color);
+}
+
+.cancelButton {
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+
+.cancelButton:hover {
+  background-color: rgba(128, 128, 128, 0.1);
+}
+
+.error {
+    color: var(--error-text-color);
+}
+/* Add these styles to your existing ProfilePage.module.css */
+
+.input, .select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.divider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 2.5rem 0;
+}
+
+.subTitle {
+    margin-bottom: 1.5rem;
+}
+
+.actionItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.actionItem:last-child {
+    border-bottom: none;
+}
+
+.actionItem h3 {
+    margin: 0 0 0.25rem 0;
+}
+
+.actionItem p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.dangerText {
+    color: #dc3545;
+}
+
+.dangerButton, .googleButton {
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    flex-shrink: 0; /* Prevents button from shrinking */
+    margin-left: 1rem;
+}
+
+.dangerButton {
+    background-color: #dc3545;
+    color: white;
+}
+
+.googleButton {
+    background-color: #4285F4;
+    color: white;
+}

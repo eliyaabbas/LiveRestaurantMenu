@@ -1,0 +1,154 @@
+.navbar {
+    background-color: var(--surface-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+/* --- Desktop Navigation --- */
+.desktopNav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.navLink {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.navLink:hover {
+    color: var(--primary-color);
+}
+
+.logoutButton {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.logoutButton:hover {
+    background-color: var(--error-bg-color);
+    color: var(--error-text-color);
+    border-color: var(--error-text-color);
+}
+
+/* --- Mobile Navigation --- */
+.mobileNav {
+    display: none; /* Hidden by default */
+    position: relative;
+}
+
+.hamburger {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+.dropdownMenu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 220px;
+    z-index: 1000;
+    padding: 0.5rem 0;
+}
+
+.dropdownLink, .dropdownButton {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    color: var(--text-color);
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.dropdownLink:hover, .dropdownButton:hover {
+    background-color: rgba(128, 128, 128, 0.1);
+}
+
+.dropdownDivider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 0.5rem 0;
+}
+
+.dropdownItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+}
+
+/* --- Media Query for Responsiveness --- */
+@media (max-width: 768px) {
+    .desktopNav {
+        display: none; /* Hide desktop nav on small screens */
+    }
+    .mobileNav {
+        display: block; /* Show mobile nav on small screens */
+    }
+}
+
+
+/* --- Theme Toggle Switch (reused from settings page) --- */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+}
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 28px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+input:checked + .slider { background-color: var(--primary-color); }
+input:checked + .slider:before { transform: translateX(22px); }

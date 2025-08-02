@@ -1,0 +1,258 @@
+/* --- Base Styles for All Templates --- */
+.publicMenuContainer {
+    min-height: 100vh;
+    padding: 2rem;
+    transition: background-color 0.3s;
+}
+.contentWrapper {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.header {
+    text-align: center;
+    margin-bottom: 2rem; /* Adjusted margin */
+}
+.categorySection {
+    margin-bottom: 3rem;
+}
+.categoryTitle {
+    border-bottom: 2px solid;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.itemsGrid {
+    display: grid;
+    gap: 1.5rem;
+}
+.itemCard {
+    padding: 1rem 0;
+}
+.itemHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.itemName {
+    font-size: 1.2rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.itemPrice {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 0;
+}
+.itemDescription {
+    margin: 0.5rem 0 0 0;
+    opacity: 0.8;
+}
+
+/* --- New Styles for Controls --- */
+.controlsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    padding: 1rem;
+    background-color: rgba(0,0,0,0.03);
+    border-radius: 8px;
+}
+.searchInput {
+    flex-grow: 1;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    min-width: 200px;
+}
+.toggleGroup {
+    display: flex;
+    background-color: rgba(0,0,0,0.05);
+    border-radius: 6px;
+    overflow: hidden;
+}
+.toggleGroup button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--text-muted-color);
+    transition: background-color 0.2s, color 0.2s;
+}
+.toggleGroup button.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+.noResults {
+    text-align: center;
+    padding: 4rem 2rem;
+    opacity: 0.7;
+}
+
+/* Veg/Non-Veg Indicators */
+.typeIndicator { display: inline-block; width: 12px; height: 12px; border: 1px solid; }
+.typeIndicator.veg { background-color: #4CAF50; border-color: #388E3C; }
+.typeIndicator.non-veg { background-color: #F44336; border-color: #D32F2F; }
+.typeIndicator.egg { background-color: #FFC107; border-color: #FFA000; }
+
+/* Loading & Error States */
+.loadingContainer { display: flex; justify-content: center; align-items: center; height: 100vh; font-size: 1.5rem; }
+.error { color: #D32F2F; }
+
+/* --- Template Specific Styles --- */
+
+/* 1. Classic Modern */
+.classic { background-color: #fff; color: #333; }
+.classic .categoryTitle { border-color: #eee; }
+.classic .itemPrice { color: #000; }
+.classic .searchInput { background-color: #fff; color: #333; }
+.classic .toggleGroup { background-color: #eee; }
+.classic .toggleGroup button { color: #555; }
+.classic .toggleGroup button.active { color: #fff; }
+
+/* 2. Dark Elegance */
+.dark-elegance { background-color: #1a202c; color: #e2e8f0; }
+.dark-elegance .categoryTitle { border-color: #4a5568; }
+.dark-elegance .itemPrice { color: #cbd5e0; }
+.dark-elegance .controlsContainer { background-color: rgba(255,255,255,0.05); }
+.dark-elegance .searchInput { background-color: #374151; color: #e2e8f0; border-color: #4a5568; }
+.dark-elegance .toggleGroup { background-color: #374151; }
+.dark-elegance .toggleGroup button { color: #9ca3af; }
+
+/* --- ADDED BACK MISSING TEMPLATES --- */
+
+/* 3. Garden Fresh */
+.garden-fresh { background-color: #f0fff4; color: #2f855a; font-family: 'Georgia', serif; }
+.garden-fresh .header h1 { font-style: italic; }
+.garden-fresh .categoryTitle { border-color: #9ae6b4; }
+.garden-fresh .itemPrice { color: #276749; }
+.garden-fresh .controlsContainer { background-color: rgba(47, 133, 90, 0.1); }
+.garden-fresh .searchInput { background-color: #fff; border-color: #9ae6b4; }
+.garden-fresh .toggleGroup { background-color: #c6f6d5; }
+.garden-fresh .toggleGroup button { color: #2f855a; }
+
+/* 4. Minimalist */
+.minimalist { background-color: #f7fafc; color: #4a5568; }
+.minimalist .itemsGrid { grid-template-columns: 1fr 1fr; }
+.minimalist .categoryTitle { border: none; text-align: center; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; }
+.minimalist .itemHeader { flex-direction: column; align-items: flex-start; }
+.minimalist .searchInput { background-color: #fff; }
+
+/* 5. Rustic Wood */
+.rustic-wood { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://www.transparenttextures.com/patterns/wood-pattern.png'); color: #fff; }
+.rustic-wood .header h1 { font-family: 'Playfair Display', serif; font-size: 3rem; }
+.rustic-wood .categoryTitle { border-color: rgba(255,255,255,0.3); }
+.rustic-wood .itemPrice { color: #f7fafc; }
+.rustic-wood .controlsContainer { background-color: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); }
+.rustic-wood .searchInput { background-color: rgba(0,0,0,0.2); color: #fff; border-color: rgba(255,255,255,0.2); }
+.rustic-wood .toggleGroup { background-color: rgba(0,0,0,0.3); }
+.rustic-wood .toggleGroup button { color: #eee; }
+
+/* 6. Seafood Breeze */
+.seafood-breeze { background-color: #e0f7fa; color: #00796b; }
+.seafood-breeze .header h1 { color: #004d40; }
+.seafood-breeze .categoryTitle { border-color: #4db6ac; }
+.seafood-breeze .itemCard { border-bottom: 1px dashed #b2ebf2; padding-bottom: 1.5rem; }
+.seafood-breeze .controlsContainer { background-color: #b2ebf2; }
+.seafood-breeze .searchInput { background-color: #fff; border-color: #4db6ac; }
+.seafood-breeze .toggleGroup { background-color: #80deea; }
+.seafood-breeze .toggleGroup button { color: #006064; }
+
+/* 7. Gourmet Gold */
+.gourmet-gold { background-color: #121212; color: #e2e8f0; }
+.gourmet-gold .header h1 { color: #FFD700; text-transform: uppercase; letter-spacing: 3px; }
+.gourmet-gold .categoryTitle { border-color: #FFD700; color: #FFD700; }
+.gourmet-gold .itemPrice { color: #FFD700; }
+.gourmet-gold .controlsContainer { background-color: #222; }
+.gourmet-gold .searchInput { background-color: #333; color: #fff; border-color: #444; }
+.gourmet-gold .toggleGroup { background-color: #333; }
+.gourmet-gold .toggleGroup button { color: #aaa; }
+
+/* 8. Cafe Chalkboard */
+.cafe-chalkboard { background-color: #333; color: #fff; font-family: 'Permanent Marker', cursive; }
+.cafe-chalkboard .header h1 { font-size: 3.5rem; }
+.cafe-chalkboard .categoryTitle { border-color: #fff; }
+.cafe-chalkboard .itemDescription { font-family: 'sans-serif'; opacity: 0.7; }
+.cafe-chalkboard .controlsContainer { background-color: #444; }
+.cafe-chalkboard .searchInput { background-color: #555; color: #fff; border-color: #666; }
+.cafe-chalkboard .toggleGroup { background-color: #555; }
+.cafe-chalkboard .toggleGroup button { color: #ddd; }
+
+/* --- Base Styles --- */
+.publicMenuContainer { min-height: 100vh; padding: 2rem; transition: background-color 0.3s; }
+.contentWrapper { max-width: 800px; margin: 0 auto; }
+.header { text-align: center; margin-bottom: 2rem; }
+.categorySection { margin-bottom: 3rem; }
+.categoryTitle { border-bottom: 2px solid; padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+.itemsGrid { display: grid; gap: 1.5rem; }
+.itemCard { padding: 1rem 0; }
+.itemHeader { display: flex; justify-content: space-between; align-items: baseline; }
+.itemName { font-size: 1.2rem; margin: 0; display: flex; align-items: center; gap: 0.75rem; }
+.itemPrice { font-size: 1.1rem; font-weight: bold; margin: 0; }
+.itemDescription { margin: 0.5rem 0 0 0; opacity: 0.8; }
+
+/* --- Controls --- */
+.controlsContainer { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; margin-bottom: 3rem; padding: 1rem; background-color: rgba(0,0,0,0.03); border-radius: 8px; }
+.searchInput { width: 100%; padding: 0.75rem 1rem; font-size: 1rem; border: 1px solid var(--border-color); border-radius: 6px; }
+.toggleGroup { display: flex; background-color: rgba(0,0,0,0.05); border-radius: 6px; overflow: hidden; flex-shrink: 0; }
+.toggleGroup button { padding: 0.75rem 1.5rem; border: none; background-color: transparent; cursor: pointer; font-weight: 500; color: var(--text-muted-color); transition: background-color 0.2s, color 0.2s; }
+.toggleGroup button.active { background-color: var(--primary-color); color: white; }
+.noResults { text-align: center; padding: 4rem 2rem; opacity: 0.7; }
+
+/* --- Search Suggestions Styles --- */
+.searchWrapper {
+    position: relative;
+    flex-grow: 1;
+    max-width: 400px; /* Added max-width for better balance */
+}
+.suggestionsList {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 10;
+}
+.suggestionItem {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.suggestionItem:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+/* --- Indicators & States --- */
+.typeIndicator { display: inline-block; width: 12px; height: 12px; border: 1px solid; }
+.typeIndicator.veg { background-color: #4CAF50; border-color: #388E3C; }
+.typeIndicator.non-veg { background-color: #F44336; border-color: #D32F2F; }
+.typeIndicator.egg { background-color: #FFC107; border-color: #FFA000; }
+.loadingContainer { display: flex; justify-content: center; align-items: center; height: 100vh; font-size: 1.5rem; }
+.error { color: #D32F2F; }
+
+/* --- Template Specific Styles --- */
+.classic { background-color: #fff; color: #333; }
+.classic .categoryTitle { border-color: #eee; }
+.classic .itemPrice { color: #000; }
+.classic .searchInput { background-color: #fff; color: #333; }
+.classic .toggleGroup { background-color: #eee; }
+.classic .toggleGroup button { color: #555; }
+.classic .toggleGroup button.active { color: #fff; }
+
+.dark-elegance { background-color: #1a202c; color: #e2e8f0; }
+.dark-elegance .categoryTitle { border-color: #4a5568; }
+.dark-elegance .itemPrice { color: #cbd5e0; }
+.dark-elegance .controlsContainer { background-color: rgba(255,255,255,0.05); }
+.dark-elegance .searchInput { background-color: #374151; color: #e2e8f0; border-color: #4a5568; }
+.dark-elegance .toggleGroup { background-color: #374151; }
+.dark-elegance .toggleGroup button { color: #9ca3af; }
+.dark-elegance .suggestionItem:hover { background-color: rgba(255,255,255,0.1); }

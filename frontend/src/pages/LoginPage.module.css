@@ -1,0 +1,188 @@
+/* This is the single, correct set of styles for the Login Page */
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  padding: 2rem;
+}
+
+.form {
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  padding: 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 420px;
+  border: 1px solid var(--border-color);
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
+  color: var(--text-color);
+}
+
+.error {
+    background-color: var(--error-bg-color);
+    color: var(--error-text-color);
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.success {
+    background-color: var(--success-bg-color);
+    color: var(--success-text-color);
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.instructions {
+    text-align: center;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 1rem;
+}
+
+.inputGroup {
+  margin-bottom: 1.25rem;
+}
+
+.inputGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.inputGroup input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.rememberGroup {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    font-size: 0.9rem;
+}
+
+.rememberGroup input {
+    margin-right: 0.5rem;
+}
+
+.rememberGroup label {
+    color: var(--text-color);
+}
+
+.forgotLink {
+    margin-left: auto; /* This pushes the link to the right */
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.forgotLink:hover {
+    text-decoration: underline;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 0.85rem;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submitButton:hover {
+  background-color: var(--primary-hover-color);
+}
+
+.submitButton:disabled {
+    background-color: #a0c3e6;
+    cursor: not-allowed;
+}
+
+.redirect {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: var(--text-color);
+}
+
+.redirect a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.redirect a:hover {
+    text-decoration: underline;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #aaa;
+    margin: 1.5rem 0;
+}
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--border-color);
+}
+.separator:not(:empty)::before {
+    margin-right: .25em;
+}
+.separator:not(:empty)::after {
+    margin-left: .25em;
+}
+
+.googleButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.googleButton:hover {
+    background-color: rgba(128, 128, 128, 0.1);
+}
+
+.googleIcon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}

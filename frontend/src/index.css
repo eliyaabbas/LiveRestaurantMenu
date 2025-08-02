@@ -1,0 +1,70 @@
+/* --- Global Design System for LiveRestaurantMenu --- */
+
+/* 1. Color Palette & Theme Variables */
+:root {
+  --primary-color: #4F46E5; /* A modern indigo */
+  --primary-hover-color: #4338CA;
+  --background-color: #F3F4F6; /* Light gray */
+  --surface-color: #FFFFFF;
+  --text-color: #1F2937;
+  --text-muted-color: #6B7280;
+  --border-color: #E5E7EB;
+  --success-color: #10B981;
+  --error-color: #EF4444;
+}
+
+[data-theme='dark'] {
+  --primary-color: #6366F1;
+  --primary-hover-color: #4F46E5;
+  --background-color: #111827;
+  --surface-color: #1F2937;
+  --text-color: #F9FAFB;
+  --text-muted-color: #9CA3AF;
+  --border-color: #374151;
+  --success-color: #34D399;
+  --error-color: #F87171;
+}
+
+/* 2. Base Styles & Typography */
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* 3. Global Component Styles (for consistency) */
+
+/* Standardized Buttons */
+.global-button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+.global-button:hover {
+    transform: translateY(-1px);
+}
+.global-button-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+.global-button-primary:hover {
+    background-color: var(--primary-hover-color);
+}
+
+/* Standardized Cards */
+.global-card {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+}

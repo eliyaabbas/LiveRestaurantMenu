@@ -1,0 +1,152 @@
+.container {
+  padding: 2rem 3rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  margin-top: 0;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  opacity: 0.8;
+  margin-bottom: 2.5rem;
+}
+
+.saveButton {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.saveButton:disabled {
+  background-color: #a0c3e6;
+  cursor: not-allowed;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card.selected {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-color);
+}
+
+.preview {
+  height: 180px;
+  padding: 1rem;
+}
+
+.cardTitle {
+  padding: 1rem;
+  margin: 0;
+  background-color: var(--surface-color);
+  text-align: center;
+}
+
+/* --- Template Preview Styles --- */
+.previewHeader {
+    height: 20%;
+    width: 60%;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
+.previewLine, .previewLineShort {
+    height: 10%;
+    margin-bottom: 0.75rem;
+    border-radius: 4px;
+}
+.previewLine { width: 80%; }
+.previewLineShort { width: 50%; }
+
+
+/* Classic Modern Theme Preview */
+.classic {
+    background-color: #ffffff;
+}
+.classic .previewHeader { background-color: #333; }
+.classic .previewLine, .classic .previewLineShort { background-color: #ccc; }
+
+/* Dark Elegance Theme Preview */
+.dark-elegance {
+    background-color: #1a202c;
+}
+.dark-elegance .previewHeader { background-color: #e2e8f0; }
+.dark-elegance .previewLine, .dark-elegance .previewLineShort { background-color: #4a5568; }
+
+/* Garden Fresh Theme Preview */
+.garden-fresh {
+    background-color: #f0fff4;
+}
+.garden-fresh .previewHeader { background-color: #2f855a; }
+.garden-fresh .previewLine, .garden-fresh .previewLineShort { background-color: #9ae6b4; }
+
+/* Minimalist Theme Preview */
+.minimalist {
+    background-color: #f7fafc;
+}
+.minimalist .previewHeader { background-color: #e2e8f0; }
+.minimalist .previewLine, .minimalist .previewLineShort { background-color: #cbd5e0; }
+
+/* --- New Template Previews --- */
+
+/* Rustic Wood Theme Preview */
+.rustic-wood {
+    background-image: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+}
+.rustic-wood .previewHeader { background-color: rgba(255, 255, 255, 0.8); }
+.rustic-wood .previewLine, .rustic-wood .previewLineShort { background-color: rgba(255, 255, 255, 0.5); }
+
+/* Seafood Breeze Theme Preview */
+.seafood-breeze {
+    background-image: linear-gradient(to right, #e0f7fa, #b2ebf2);
+}
+.seafood-breeze .previewHeader { background-color: #00796b; }
+.seafood-breeze .previewLine, .seafood-breeze .previewLineShort { background-color: #4db6ac; }
+
+/* Gourmet Gold Theme Preview */
+.gourmet-gold {
+    background-color: #121212;
+    background-image: linear-gradient(45deg, rgba(255, 215, 0, 0.1) 25%, transparent 25%, transparent 75%, rgba(255, 215, 0, 0.1) 75%),
+                      linear-gradient(45deg, rgba(255, 215, 0, 0.1) 25%, transparent 25%, transparent 75%, rgba(255, 215, 0, 0.1) 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+}
+.gourmet-gold .previewHeader { background-color: #FFD700; }
+.gourmet-gold .previewLine, .gourmet-gold .previewLineShort { background-color: #444; }
+
+/* Cafe Chalkboard Theme Preview */
+.cafe-chalkboard {
+    background-color: #333;
+    background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+.cafe-chalkboard .previewHeader { background-color: rgba(255, 255, 255, 0.8); }
+.cafe-chalkboard .previewLine, .cafe-chalkboard .previewLineShort { background-color: rgba(255, 255, 255, 0.5); }

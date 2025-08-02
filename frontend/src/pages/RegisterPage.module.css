@@ -1,0 +1,106 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  padding: 2rem;
+}
+
+.form {
+  background-color: white;
+  padding: 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 420px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
+  color: #333;
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.inputGroup {
+  margin-bottom: 1.25rem;
+}
+
+.inputGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Important for padding */
+  transition: border-color 0.2s;
+}
+
+.inputGroup input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 0.85rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submitButton:hover {
+  background-color: #0056b3;
+}
+
+.submitButton:disabled {
+    background-color: #a0c3e6;
+    cursor: not-allowed;
+}
+
+.redirect {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #555;
+}
+
+.redirect a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.redirect a:hover {
+    text-decoration: underline;
+}
+/* Add this to RegisterPage.module.css */
+.inputGroup select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
