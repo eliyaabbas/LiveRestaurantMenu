@@ -56,6 +56,7 @@ const LoginPage = () => {
           console.error("Could not fetch user settings after login", settingsErr);
       }
 
+      // The redirect will now work correctly because the state is updated
       navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.msg || 'An error occurred. Please try again.');

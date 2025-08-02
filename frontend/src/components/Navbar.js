@@ -29,10 +29,9 @@ const Navbar = () => {
 
     const handleLogout = () => {
         logout(); // Use the logout function from the context
-        // No need to navigate here, the AuthContext will handle the state change
     };
 
-    // Don't show the navbar on public or auth pages if the user is not authenticated
+    // Don't show the navbar if the user is not authenticated
     if (!isAuthenticated) {
         return null;
     }
