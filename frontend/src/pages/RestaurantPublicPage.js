@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios'; // Using axios for a direct, public API call
+import * as api from '../api'; // Use our centralized API file
 import { QRCodeCanvas } from 'qrcode.react';
 import styles from './RestaurantPublicPage.module.css';
 
@@ -18,8 +18,8 @@ const RestaurantPublicPage = () => {
                 return;
             }
             try {
-                // Call our new public endpoint
-                const { data } = await axios.get(`http://localhost:5000/api/public/restaurant/${userId}`);
+                // Call the correct API function from our centralized file
+                const { data } = await api.getPublicRestaurantPage(userId);
                 setRestaurantData(data);
             } catch (err) {
                 setError('Could not find this restaurant or they have no published menus.');

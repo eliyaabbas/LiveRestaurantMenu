@@ -39,6 +39,8 @@ export const getMenuById = (id) => API.get(`/menu/${id}`);
 export const updateMenuById = (id, menuData) => API.put(`/menu/${id}`, menuData);
 export const deleteMenuById = (id) => API.delete(`/menu/${id}`);
 
-// --- FIX: Public routes now correctly point to the live server URL ---
+// --- Public Routes ---
 export const getPublicMenu = (id) => axios.get(`${PROD_URL}/menu/public/${id}`);
 export const trackMenuView = (id) => axios.post(`${PROD_URL}/menu/public/${id}/view`);
+// NEW: Function for the public restaurant page
+export const getPublicRestaurantPage = (userId) => axios.get(`${PROD_URL}/public/restaurant/${userId}`);
