@@ -1,23 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
+import { useAuth } from '../contexts/AuthContext'; // Import the useAuth hook
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
     const location = useLocation();
-    const navigate = useNavigate();
     const { theme, toggleTheme } = useTheme();
+    const { isAuthenticated, logout } = useAuth(); // Get isAuthenticated and logout from context
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const menuRef = useRef(null); // Ref for the menu to detect outside clicks
+    const menuRef = useRef(null);
 
-   // const token = localStorage.getItem('authToken');
-
-    // Close menu on route change
     useEffect(() => {
         setIsMenuOpen(false);
     }, [location]);
 
-    // Close menu when clicking outside
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -30,17 +27,15 @@ const Navbar = () => {
         };
     }, [menuRef]);
 
-
     const handleLogout = () => {
-        localStorage.removeItem('authToken');
-        navigate('/login');
+        logout(); // Use the logout function from the context
+        // No need to navigate here, the AuthContext will handle the state change
     };
 
-    // Don't show the navbar on these pages
-    if (['/', '/login', '/register', '/forgot-password', '/auth/success'].includes(location.pathname) || location.pathname.startsWith('/reset-password')) {
-    return null;
-}
-
+    // Don't show the navbar on public or auth pages if the user is not authenticated
+    if (!isAuthenticated) {
+        return null;
+    }
 
     return (
         <nav className={styles.navbar}>
@@ -49,7 +44,6 @@ const Navbar = () => {
                     LiveRestaurantMenu
                 </Link>
 
-                {/* Desktop Nav */}
                 <div className={styles.desktopNav}>
                     <Link to="/dashboard" className={styles.navLink}>Dashboard</Link>
                     <Link to="/settings" className={styles.navLink}>Settings</Link>
@@ -57,7 +51,6 @@ const Navbar = () => {
                     <button onClick={handleLogout} className={styles.logoutButton}>Logout</button>
                 </div>
 
-                {/* Mobile Nav - Hamburger */}
                 <div className={styles.mobileNav} ref={menuRef}>
                     <button onClick={() => setIsMenuOpen(!isMenuOpen)} className={styles.hamburger}>
                         ☰

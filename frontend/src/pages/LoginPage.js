@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import * as api from '../api';
 import styles from './LoginPage.module.css';
 import { useTheme } from '../contexts/ThemeContext';
+import { useAuth } from '../contexts/AuthContext'; // Import the useAuth hook
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -11,6 +12,7 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { setTheme } = useTheme();
+  const { login } = useAuth(); // Get the login function from our context
 
   useEffect(() => {
     const rememberedEmail = localStorage.getItem('rememberedEmail');
@@ -42,7 +44,8 @@ const LoginPage = () => {
         localStorage.removeItem('rememberedEmail');
       }
 
-      localStorage.setItem('authToken', data.token);
+      // --- FIX: Call the login function from AuthContext ---
+      login(data.token); // This updates the global state
 
       try {
         const { data: settingsData } = await api.getSettings();
@@ -61,9 +64,7 @@ const LoginPage = () => {
     }
   };
 
-  // --- FIX: Use the live backend URL ---
   const handleGoogleLogin = () => {
-    // This now points to your live Render backend
     window.location.href = 'https://live-restaurant-menu-api.onrender.com/api/auth/google';
   };
 
