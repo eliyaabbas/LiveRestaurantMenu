@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import * as api from '../api';
 import styles from './LoginPage.module.css';
-import { useTheme } from '../contexts/ThemeContext'; // Import the useTheme hook
+import { useTheme } from '../contexts/ThemeContext';
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -10,7 +10,7 @@ const LoginPage = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { setTheme } = useTheme(); // Get the setTheme function from our context
+  const { setTheme } = useTheme();
 
   useEffect(() => {
     const rememberedEmail = localStorage.getItem('rememberedEmail');
@@ -34,7 +34,6 @@ const LoginPage = () => {
     setLoading(true);
 
     try {
-      // Step 1: Log the user in and get the auth token
       const { data } = await api.login(formData);
       
       if (rememberMe) {
@@ -45,27 +44,27 @@ const LoginPage = () => {
 
       localStorage.setItem('authToken', data.token);
 
-      // --- NEW: Step 2: Fetch user settings after login ---
       try {
         const { data: settingsData } = await api.getSettings();
         if (settingsData.theme) {
-            setTheme(settingsData.theme); // Apply the theme from the database
+            setTheme(settingsData.theme);
         }
       } catch (settingsErr) {
           console.error("Could not fetch user settings after login", settingsErr);
       }
-      // --- END NEW CODE ---
 
       navigate('/dashboard');
-    } catch (err) { // <<< FIX: Added the opening curly brace
+    } catch (err) {
       setError(err.response?.data?.msg || 'An error occurred. Please try again.');
     } finally {
       setLoading(false);
     }
   };
 
+  // --- FIX: Use the live backend URL ---
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:5000/api/auth/google';
+    // This now points to your live Render backend
+    window.location.href = 'https://live-restaurant-menu-api.onrender.com/api/auth/google';
   };
 
   return (
