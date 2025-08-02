@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import * as api from '../api';
 import { useAuth } from '../contexts/AuthContext'; // Import the useAuth hook
 
 const GoogleAuthSuccessPage = () => {
@@ -9,25 +8,21 @@ const GoogleAuthSuccessPage = () => {
   const { login } = useAuth(); // Get the login function from our context
 
   useEffect(() => {
-    const handleAuth = async () => {
+    const handleAuth = () => {
         const token = searchParams.get('token');
+        // --- NEW: Check if the user is new ---
+        const isNewUser = searchParams.get('isNew') === 'true';
 
         if (token) {
-            // --- FIX: Use the login function to update the global state ---
+            // Log the user in globally
             login(token);
             
-            try {
-                // After setting the token, fetch the user's profile to check if it's complete
-                const { data: profile } = await api.getProfile();
-
-                if (!profile.phone || !profile.dob) {
-                    navigate('/complete-profile');
-                } else {
-                    navigate('/dashboard');
-                }
-            } catch (error) {
-                // If profile fetch fails for any reason, just go to the dashboard
-                console.error("Failed to fetch profile after Google login:", error);
+            // --- UPDATED: Redirect based on user status ---
+            if (isNewUser) {
+                // If the user is new, send them to complete their profile and verify
+                navigate('/complete-profile');
+            } else {
+                // If they are an existing user, send them straight to the dashboard
                 navigate('/dashboard');
             }
         } else {
