@@ -19,6 +19,7 @@ export const register = (formData) => API.post('/auth/register', formData);
 export const login = (formData) => API.post('/auth/login', formData);
 export const forgotPassword = (formData) => API.post('/auth/forgot-password', formData);
 export const resetPassword = (token, formData) => API.post(`/auth/reset-password/${token}`, formData);
+export const verifyOtp = (otpData) => API.post('/auth/verify-otp', otpData); // Added this missing function
 
 // --- Profile Routes ---
 export const getProfile = () => API.get('/profile');
@@ -42,5 +43,4 @@ export const deleteMenuById = (id) => API.delete(`/menu/${id}`);
 // --- Public Routes ---
 export const getPublicMenu = (id) => axios.get(`${PROD_URL}/menu/public/${id}`);
 export const trackMenuView = (id) => axios.post(`${PROD_URL}/menu/public/${id}/view`);
-// NEW: Function for the public restaurant page
 export const getPublicRestaurantPage = (userId) => axios.get(`${PROD_URL}/public/restaurant/${userId}`);
