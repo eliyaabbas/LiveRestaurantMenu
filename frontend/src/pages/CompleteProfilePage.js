@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react'; // 'useEffect' has been removed
 import { useNavigate } from 'react-router-dom';
 import * as api from '../api';
 import styles from './RegisterPage.module.css'; // Reuse the registration page styles
