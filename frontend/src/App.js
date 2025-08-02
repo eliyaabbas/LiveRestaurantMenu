@@ -3,13 +3,11 @@ import { BrowserRouter as Router, Route, Routes, Navigate, Outlet } from 'react-
 import { ThemeProvider } from './contexts/ThemeContext';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 
-// Import Components
+// Import Components & Pages...
 import Navbar from './components/Navbar';
 import DashboardLayout from './components/DashboardLayout';
 import Footer from './components/Footer';
 import styles from './App.module.css';
-
-// Import Pages
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
@@ -24,21 +22,25 @@ import GoogleAuthSuccessPage from './pages/GoogleAuthSuccessPage';
 import PublicMenuPage from './pages/PublicMenuPage';
 import RestaurantPublicPage from './pages/RestaurantPublicPage';
 import VerifyOtpPage from './pages/VerifyOtpPage';
-import CompleteProfilePage from './pages/CompleteProfilePage'; // Import the new page
+import CompleteProfilePage from './pages/CompleteProfilePage';
 
-// --- UPDATED Protected Route Component ---
+// --- Protected Route (for logged-in users) ---
 const ProtectedRoute = () => {
   const { isAuthenticated, loading } = useAuth();
-
-  if (loading) {
-    // Show a loading indicator while we check for a valid session
-    return <div style={{ textAlign: 'center', marginTop: '5rem' }}>Loading session...</div>;
-  }
-
+  if (loading) return <div style={{ textAlign: 'center', marginTop: '5rem' }}>Loading session...</div>;
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
-// --- Main Layout for the entire authenticated app ---
+// --- NEW: Public Only Route (for logged-out users) ---
+// This prevents logged-in users from seeing the login/register pages
+const PublicRoute = () => {
+    const { isAuthenticated, loading } = useAuth();
+    if (loading) return <div style={{ textAlign: 'center', marginTop: '5rem' }}>Loading session...</div>;
+    return isAuthenticated ? <Navigate to="/dashboard" replace /> : <Outlet />;
+};
+
+
+// --- Main Layout for the authenticated app ---
 const MainAppLayout = () => (
   <div className={styles.appWrapper}>
     <Navbar />
@@ -56,20 +58,23 @@ function App() {
       <AuthProvider>
         <Router>
           <Routes>
-            {/* Public Routes */}
+            {/* --- Public Routes (visible to everyone) --- */}
             <Route path="/menu/:menuId" element={<PublicMenuPage />} />
             <Route path="/restaurant/:userId" element={<RestaurantPublicPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/verify-otp" element={<VerifyOtpPage />} />
-            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-            <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
-            <Route path="/auth/success" element={<GoogleAuthSuccessPage />} />
+            
+            {/* --- Public Only Routes (visible only to logged-out users) --- */}
+            <Route element={<PublicRoute />}>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/verify-otp" element={<VerifyOtpPage />} />
+                <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+                <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
+                <Route path="/auth/success" element={<GoogleAuthSuccessPage />} />
+            </Route>
 
-            {/* Protected Routes */}
+            {/* --- Protected Routes (visible only to logged-in users) --- */}
             <Route element={<ProtectedRoute />}>
               <Route element={<MainAppLayout />}>
-                <Route path="/complete-profile" element={<CompleteProfilePage />} />
                 <Route path="/dashboard" element={<DashboardLayout />}>
                   <Route index element={<DashboardPage />} />
                   <Route path="menu/:menuId" element={<MenuBuilderPage />} />
@@ -78,11 +83,12 @@ function App() {
                 </Route>
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/settings" element={<SettingsPage />} />
+                <Route path="/complete-profile" element={<CompleteProfilePage />} />
               </Route>
             </Route>
 
-            {/* Fallback route for any other path */}
-            <Route path="*" element={<Navigate to="/login" />} />
+            {/* --- Fallback Route --- */}
+            <Route path="*" element={<Navigate to="/dashboard" />} />
           </Routes>
         </Router>
       </AuthProvider>
