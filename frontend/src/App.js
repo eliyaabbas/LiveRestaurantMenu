@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate, Outlet } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
-import { AuthProvider, useAuth } from './contexts/AuthContext'; // Import the new Auth context
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 
 // Import Components
 import Navbar from './components/Navbar';
@@ -24,6 +24,7 @@ import GoogleAuthSuccessPage from './pages/GoogleAuthSuccessPage';
 import PublicMenuPage from './pages/PublicMenuPage';
 import RestaurantPublicPage from './pages/RestaurantPublicPage';
 import VerifyOtpPage from './pages/VerifyOtpPage';
+import CompleteProfilePage from './pages/CompleteProfilePage'; // Import the new page
 
 // --- UPDATED Protected Route Component ---
 const ProtectedRoute = () => {
@@ -31,7 +32,6 @@ const ProtectedRoute = () => {
 
   if (loading) {
     // Show a loading indicator while we check for a valid session
-    // This prevents the flicker/redirect issue
     return <div style={{ textAlign: 'center', marginTop: '5rem' }}>Loading session...</div>;
   }
 
@@ -52,7 +52,6 @@ const MainAppLayout = () => (
 
 function App() {
   return (
-    // Wrap the entire app in both providers
     <ThemeProvider>
       <AuthProvider>
         <Router>
@@ -70,6 +69,7 @@ function App() {
             {/* Protected Routes */}
             <Route element={<ProtectedRoute />}>
               <Route element={<MainAppLayout />}>
+                <Route path="/complete-profile" element={<CompleteProfilePage />} />
                 <Route path="/dashboard" element={<DashboardLayout />}>
                   <Route index element={<DashboardPage />} />
                   <Route path="menu/:menuId" element={<MenuBuilderPage />} />
