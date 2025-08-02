@@ -1,21 +1,28 @@
-/* Add these new styles to your existing RegisterPage.module.css file */
-
-.radioGroup {
+/* --- New Styles for the Toggle Switch --- */
+.toggleSwitch {
     display: flex;
-    gap: 1.5rem;
-    padding: 0.5rem 0;
+    background-color: var(--background-color);
+    border-radius: 6px;
+    padding: 4px;
+    border: 1px solid var(--border-color);
 }
 
-.radioLabel {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+.toggleSwitch button {
+    flex: 1;
+    padding: 0.6rem;
+    border: none;
+    background-color: transparent;
+    border-radius: 4px;
     cursor: pointer;
+    font-weight: 500;
+    color: var(--text-muted-color);
+    transition: background-color 0.2s, color 0.2s;
 }
 
-.radioLabel input {
-    width: auto; /* Override default input width */
-    accent-color: var(--primary-color); /* Style the radio button color */
+.toggleSwitch button.active {
+    background-color: var(--surface-color);
+    color: var(--primary-color);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 

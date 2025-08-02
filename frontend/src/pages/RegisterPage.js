@@ -61,7 +61,7 @@ const RegisterPage = () => {
         <h2 className={styles.title}>Create Your Account</h2>
         {error && <p className={styles.error}>{error}</p>}
         
-        {/* All existing input fields remain here... */}
+        {/* Input fields... */}
         <div className={styles.inputGroup}>
           <label htmlFor="name">Restaurant Name</label>
           <input type="text" id="name" name="name" onChange={handleChange} required />
@@ -75,30 +75,24 @@ const RegisterPage = () => {
           <input type="tel" id="phone" name="phone" onChange={handleChange} />
         </div>
         
-        {/* --- NEW: OTP Method Selection --- */}
+        {/* --- NEW: OTP Method Toggle Switch --- */}
         <div className={styles.inputGroup}>
             <label>Send OTP via</label>
-            <div className={styles.radioGroup}>
-                <label className={styles.radioLabel}>
-                    <input 
-                        type="radio" 
-                        name="otpMethod" 
-                        value="email" 
-                        checked={otpMethod === 'email'} 
-                        onChange={(e) => setOtpMethod(e.target.value)}
-                    />
+            <div className={styles.toggleSwitch}>
+                <button 
+                    type="button" 
+                    className={otpMethod === 'email' ? styles.active : ''} 
+                    onClick={() => setOtpMethod('email')}
+                >
                     Email
-                </label>
-                <label className={styles.radioLabel}>
-                    <input 
-                        type="radio" 
-                        name="otpMethod" 
-                        value="phone" 
-                        checked={otpMethod === 'phone'} 
-                        onChange={(e) => setOtpMethod(e.target.value)}
-                    />
+                </button>
+                <button 
+                    type="button" 
+                    className={otpMethod === 'phone' ? styles.active : ''} 
+                    onClick={() => setOtpMethod('phone')}
+                >
                     Phone (SMS)
-                </label>
+                </button>
             </div>
         </div>
 

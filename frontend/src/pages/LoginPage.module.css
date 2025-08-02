@@ -1,11 +1,9 @@
-/* This is the single, correct set of styles for the Login Page */
-
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 90vh;
-  padding: 2rem;
+  padding: 1rem; /* Adjusted padding for mobile */
 }
 
 .form {
@@ -33,22 +31,6 @@
     border-radius: 4px;
     margin-bottom: 1rem;
     text-align: center;
-}
-
-.success {
-    background-color: var(--success-bg-color);
-    color: var(--success-text-color);
-    padding: 0.75rem;
-    border-radius: 4px;
-    margin-bottom: 1rem;
-    text-align: center;
-}
-
-.instructions {
-    text-align: center;
-    color: var(--text-color);
-    opacity: 0.8;
-    margin-bottom: 1rem;
 }
 
 .inputGroup {
@@ -80,21 +62,18 @@
 
 .rememberGroup {
     display: flex;
+    flex-wrap: wrap; /* --- FIX: Allow items to wrap --- */
     align-items: center;
     margin-bottom: 1.25rem;
     font-size: 0.9rem;
-}
-
-.rememberGroup input {
-    margin-right: 0.5rem;
+    gap: 0.5rem; /* Add gap for spacing */
 }
 
 .rememberGroup label {
-    color: var(--text-color);
+    margin-right: auto; /* Push the link to the right */
 }
 
 .forgotLink {
-    margin-left: auto; /* This pushes the link to the right */
     color: var(--primary-color);
     text-decoration: none;
 }
@@ -128,7 +107,7 @@
 .redirect {
     text-align: center;
     margin-top: 1.5rem;
-    color: var(--text-color);
+    color: var(--text-muted-color);
 }
 
 .redirect a {
@@ -185,4 +164,11 @@
     width: 20px;
     height: 20px;
     margin-right: 10px;
+}
+
+/* --- NEW: Media Query for smaller screens --- */
+@media (max-width: 480px) {
+    .form {
+        padding: 1.5rem;
+    }
 }

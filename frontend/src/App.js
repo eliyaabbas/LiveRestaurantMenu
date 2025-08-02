@@ -3,11 +3,13 @@ import { BrowserRouter as Router, Route, Routes, Navigate, Outlet } from 'react-
 import { ThemeProvider } from './contexts/ThemeContext';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 
-// Import Components & Pages...
+// Import Components
 import Navbar from './components/Navbar';
 import DashboardLayout from './components/DashboardLayout';
 import Footer from './components/Footer';
 import styles from './App.module.css';
+
+// Import Pages
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
@@ -27,15 +29,18 @@ import CompleteProfilePage from './pages/CompleteProfilePage';
 // --- Protected Route (for logged-in users) ---
 const ProtectedRoute = () => {
   const { isAuthenticated, loading } = useAuth();
-  if (loading) return <div style={{ textAlign: 'center', marginTop: '5rem' }}>Loading session...</div>;
+  if (loading) {
+    return <div style={{ textAlign: 'center', marginTop: '5rem' }}>Loading session...</div>;
+  }
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
-// --- NEW: Public Only Route (for logged-out users) ---
-// This prevents logged-in users from seeing the login/register pages
+// --- Public Only Route (for logged-out users) ---
 const PublicRoute = () => {
     const { isAuthenticated, loading } = useAuth();
-    if (loading) return <div style={{ textAlign: 'center', marginTop: '5rem' }}>Loading session...</div>;
+    if (loading) {
+      return <div style={{ textAlign: 'center', marginTop: '5rem' }}>Loading session...</div>;
+    }
     return isAuthenticated ? <Navigate to="/dashboard" replace /> : <Outlet />;
 };
 
