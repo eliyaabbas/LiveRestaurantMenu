@@ -1,3 +1,25 @@
+/* Add these new styles to your existing RegisterPage.module.css file */
+
+.radioGroup {
+    display: flex;
+    gap: 1.5rem;
+    padding: 0.5rem 0;
+}
+
+.radioLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.radioLabel input {
+    width: auto; /* Override default input width */
+    accent-color: var(--primary-color); /* Style the radio button color */
+}
+
+
+/* --- The rest of your CSS file remains the same --- */
 .container {
   display: flex;
   justify-content: center;
@@ -7,7 +29,7 @@
 }
 
 .form {
-  background-color: white;
+  background-color: var(--surface-color);
   padding: 2.5rem;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -19,12 +41,12 @@
   text-align: center;
   margin-bottom: 1.5rem;
   font-size: 1.75rem;
-  color: #333;
+  color: var(--text-color);
 }
 
 .error {
-    background-color: #f8d7da;
-    color: #721c24;
+    background-color: var(--error-bg-color);
+    color: var(--error-text-color);
     padding: 0.75rem;
     border-radius: 4px;
     margin-bottom: 1rem;
@@ -38,22 +60,24 @@
 .inputGroup label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #555;
+  color: var(--text-color);
   font-weight: 500;
 }
 
-.inputGroup input {
+.inputGroup input, .inputGroup select {
   width: 100%;
   padding: 0.75rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
+  background-color: var(--background-color);
+  color: var(--text-color);
   border-radius: 4px;
-  box-sizing: border-box; /* Important for padding */
-  transition: border-color 0.2s;
+  box-sizing: border-box;
+  font-size: 1rem;
 }
 
 .inputGroup input:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: var(--primary-color);
 }
 
 .submitButton {
@@ -61,7 +85,7 @@
   padding: 0.85rem;
   border: none;
   border-radius: 4px;
-  background-color: #007bff;
+  background-color: var(--primary-color);
   color: white;
   font-size: 1rem;
   font-weight: bold;
@@ -70,7 +94,7 @@
 }
 
 .submitButton:hover {
-  background-color: #0056b3;
+  background-color: var(--primary-hover-color);
 }
 
 .submitButton:disabled {
@@ -81,26 +105,15 @@
 .redirect {
     text-align: center;
     margin-top: 1.5rem;
-    color: #555;
+    color: var(--text-muted-color);
 }
 
 .redirect a {
-    color: #007bff;
+    color: var(--primary-color);
     text-decoration: none;
     font-weight: 500;
 }
 
 .redirect a:hover {
     text-decoration: underline;
-}
-/* Add this to RegisterPage.module.css */
-.inputGroup select {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid var(--border-color);
-  background-color: var(--background-color);
-  color: var(--text-color);
-  border-radius: 4px;
-  box-sizing: border-box;
-  font-size: 1rem;
 }
