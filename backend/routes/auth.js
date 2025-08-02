@@ -1,81 +1,107 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken'); // Declared only ONCE
+const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const passport = require('passport');
 const User = require('../models/User');
 const sendEmail = require('../utils/sendEmail');
 
-// @route   POST api/auth/register
-// @desc    Register a new user
-// @access  Public
+// --- UPDATED: Register Route ---
+// Now sends an OTP instead of logging in directly
 router.post('/register', async (req, res) => {
-  // Destructure all the new fields from the request body
   const { name, email, password, phone, dob, gender } = req.body;
-
   try {
     let user = await User.findOne({ email });
-    if (user) {
+    if (user && user.isVerified) {
       return res.status(400).json({ msg: 'User already exists' });
     }
+    // If user exists but is not verified, we'll overwrite their data with the new registration attempt
+    if (user && !user.isVerified) {
+        await User.deleteOne({ email });
+    }
 
-    // Create a new user instance with all the fields
-    user = new User({
-      name,
-      email,
-      password,
-      phone,
-      dob,
-      gender,
-    });
-
-    // Encrypt password
+    user = new User({ name, email, password, phone, dob, gender });
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(password, salt);
 
-    // Save user to database
+    // Generate 6-digit OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    user.verificationOtp = otp;
+    user.verificationOtpExpires = Date.now() + 3600000; // 1 hour
+    
     await user.save();
 
-    // Create and return JWT (no changes here)
-    const payload = { user: { id: user.id } };
-    jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 360000 }, (err, token) => {
-      if (err) throw err;
-      res.json({ token });
-    });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
-  }
-});
-// @route   POST api/auth/login
-// @desc    Authenticate user & get token
-// @access  Public
-router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    let user = await User.findOne({ email });
-    if (!user) {
-      return res.status(400).json({ msg: 'Invalid Credentials' });
-    }
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ msg: 'Invalid Credentials' });
-    }
-    const payload = { user: { id: user.id } };
-    jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 360000 }, (err, token) => {
-      if (err) throw err;
-      res.json({ token });
-    });
+    // Send OTP email
+    const message = `<h1>Welcome to LiveRestaurantMenu!</h1><p>Your verification code is:</p><h2>${otp}</h2><p>This code will expire in one hour.</p>`;
+    await sendEmail({ email: user.email, subject: 'Verify Your Email Address', html: message });
+
+    res.status(200).json({ msg: 'Registration successful. Please check your email for a verification code.' });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
 });
 
-// @route   POST api/auth/forgot-password
-// @desc    Request a password reset link (sends real email)
-// @access  Public
+// --- NEW: Verify OTP Route ---
+router.post('/verify-otp', async (req, res) => {
+    const { email, otp } = req.body;
+    try {
+        const user = await User.findOne({ 
+            email, 
+            verificationOtp: otp, 
+            verificationOtpExpires: { $gt: Date.now() } 
+        });
+
+        if (!user) {
+            return res.status(400).json({ msg: 'Invalid OTP or OTP has expired.' });
+        }
+
+        user.isVerified = true;
+        user.verificationOtp = undefined;
+        user.verificationOtpExpires = undefined;
+        await user.save();
+
+        // Create and return JWT so the user is logged in
+        const payload = { user: { id: user.id } };
+        jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 360000 }, (err, token) => {
+            if (err) throw err;
+            res.json({ token });
+        });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
+// --- UPDATED: Login Route ---
+// Now checks if the user is verified
+router.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        let user = await User.findOne({ email });
+        if (!user) return res.status(400).json({ msg: 'Invalid Credentials' });
+        
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) return res.status(400).json({ msg: 'Invalid Credentials' });
+
+        // Check if user is verified
+        if (!user.isVerified) {
+            return res.status(401).json({ msg: 'Account not verified. Please check your email for the OTP.' });
+        }
+
+        const payload = { user: { id: user.id } };
+        jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 360000 }, (err, token) => {
+            if (err) throw err;
+            res.json({ token });
+        });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
+// --- Forgot Password Route ---
 router.post('/forgot-password', async (req, res) => {
   try {
     const { email } = req.body;
@@ -106,9 +132,7 @@ router.post('/forgot-password', async (req, res) => {
   }
 });
 
-// @route   POST api/auth/reset-password/:token
-// @desc    Reset the password using a token
-// @access  Public
+// --- Reset Password Route ---
 router.post('/reset-password/:token', async (req, res) => {
   try {
     const { password } = req.body;
@@ -132,17 +156,10 @@ router.post('/reset-password/:token', async (req, res) => {
 });
 
 // --- Google OAuth Routes ---
-
-// @route   GET api/auth/google
-// @desc    Initiate Google authentication
-// @access  Public
 router.get('/google', passport.authenticate('google', {
   scope: ['profile', 'email']
 }));
 
-// @route   GET api/auth/google/callback
-// @desc    Callback route for Google to redirect to
-// @access  Public
 router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login', session: false }), (req, res) => {
   const payload = { user: { id: req.user.id } };
   jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 360000 }, (err, token) => {

@@ -1,30 +1,21 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-  // ... other user fields like name, email, password, etc. ...
-
-  // Expanded settings object
-  settings: {
-    theme: {
-      type: String,
-      default: 'light',
-    },
-    // --- New Settings Fields ---
-    currency: {
-        type: String,
-        default: '$',
-    },
-    showPrices: {
-        type: Boolean,
-        default: true,
-    },
-    showVegNonVeg: {
-        type: Boolean,
-        default: true,
-    }
+  // ... (existing fields like name, email, password, etc.)
+  
+  // --- New Fields for OTP Verification ---
+  isVerified: {
+    type: Boolean,
+    default: false,
+  },
+  verificationOtp: {
+    type: String,
+  },
+  verificationOtpExpires: {
+    type: Date,
   },
   
-  // ... rest of the schema like date, resetPasswordToken, etc. ...
+  // ... (rest of the schema)
   name: {
     type: String,
     required: true,
@@ -50,6 +41,24 @@ const UserSchema = new mongoose.Schema({
   gender: {
     type: String,
     enum: ['Male', 'Female', 'Other', 'Prefer not to say'],
+  },
+  settings: {
+    theme: {
+      type: String,
+      default: 'light',
+    },
+    currency: {
+        type: String,
+        default: '$',
+    },
+    showPrices: {
+        type: Boolean,
+        default: true,
+    },
+    showVegNonVeg: {
+        type: Boolean,
+        default: true,
+    }
   },
   date: {
     type: Date,
