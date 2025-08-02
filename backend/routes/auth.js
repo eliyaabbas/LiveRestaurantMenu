@@ -29,8 +29,15 @@ router.post('/register', async (req, res) => {
     
     await user.save();
 
-    const message = `<h1>Welcome to LiveRestaurantMenu!</h1><p>Your verification code is:</p><h2>${otp}</h2><p>This code will expire in one hour.</p>`;
-    await sendEmail({ email: user.email, subject: 'Verify Your Email Address', html: message });
+    // --- FIX: Improved Error Handling for Email ---
+    try {
+        const message = `<h1>Welcome to LiveRestaurantMenu!</h1><p>Your verification code is:</p><h2>${otp}</h2><p>This code will expire in one hour.</p>`;
+        await sendEmail({ email: user.email, subject: 'Verify Your Email Address', html: message });
+    } catch (emailError) {
+        console.error("!!! FAILED TO SEND OTP EMAIL !!!", emailError);
+        // This provides a much more specific error message to the user
+        return res.status(500).json({ msg: "User registered, but could not send verification email. Please check server configuration." });
+    }
 
     res.status(200).json({ msg: 'Registration successful. Please check your email for a verification code.' });
   } catch (err) {
