@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Create an Axios instance with the base URL of your backend
-const API = axios.create({ baseURL: 'https://live-restaurant-menu-api.onrender.com });
+const API = axios.create({ baseURL: 'https://live-restaurant-menu-api.onrender.com'});
 
 // Add a request interceptor to include the token on all requests
 // This is a best practice so we don't have to add the header manually every time
